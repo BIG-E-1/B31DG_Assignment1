@@ -69,9 +69,27 @@ void loop() {
 
     //Enable stream of pulses & run modified 
     while  ((But1_State == LOW) &&(But2_State == HIGH)){
+
+      // read the state of the pushbutton value:
       But1_State = digitalRead(But1_);
       But2_State = digitalRead(But2_);
-      digitalWrite(SigA_, LOW); 
-      digitalWrite(SigB_, LOW);             
-    }
+
+      //Conts
+      int A_Count = A_ + (C_ * Fiftyus) ;            //Resets A (pulse length) to original value
+
+      //Produce B Pulse
+      digitalWrite(SigB_, HIGH);    //Sig B high
+      delay(Fiftyus);               //B signal length of 50us
+      digitalWrite(SigB_, LOW);     //Sig B low
+
+      //Loop for A pulse of C length
+      for(int C_Loop = 1; C_Loop <= C_; C_Loop++){ 
+        digitalWrite(SigA_, HIGH);   // turn the LED on (HIGH is the voltage level)
+        delay(A_Count);              //Signal A new defined length
+        A_Count = A_Count - Fiftyus; //Increments length of pulse A by 50us.   
+        digitalWrite(SigA_, LOW);    //Signal A low
+        delay(B_);                   //A signal length of B      
+      }
+      delay(D_);                     //After sequence of pulse. Length pause D.
+    }             
 }
