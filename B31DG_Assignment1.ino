@@ -36,7 +36,7 @@ void loop() {
     // Enable Stream of Pulses & run as normal
     if  ((But1_State == LOW) &&(But2_State == LOW)){
 
-      //Conts
+      //Counters
       int A_Count = A_ ;                              //Resets A (pulse length) to original value
 
       //Produce B Pulse
@@ -56,7 +56,7 @@ void loop() {
     }
 
 
-    //Disable stream of pulses 
+    //Disable the stream of pulses
     if  (But1_State == HIGH ){
       digitalWrite(SigA_, LOW); 
       digitalWrite(SigB_, LOW);
